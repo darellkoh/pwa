@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,
+    user-scalable=0, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app- status-bar-style" content="black-translucent"/>
+
 <head>
     <base href="/" />
-    <title>Fullstack Academy Generated Application</title>
+    <title>Darell Koh</title>
     <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/modern-theme/material-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="/modern-theme/socicon.min.css" />
@@ -17,19 +24,19 @@
     <script src="/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="/socket.io-client/socket.io.js"></script>
     <script src="/main.js"></script>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
 </head>
+
 <body ng-app="FullstackGeneratedApp">
-    <!-- <img style="width:500px; height:500px" id="botImageEnd" src="chatbot/chat-01.png" /> -->
-    <button id="floatButton">Click me to ask for help!</button>
-    <audio autoplay src='/feeMovie/looking.mp3'></audio>
-    <div id="money"></div>
-    <chat-bot id="chat-bot"></chat-bot>
     <navbar style="z-index: 2; position: absolute" nav-bar-util></navbar>
-    <!-- <div id="main" ui-view> -->
     <div id='main'>
         <ui-view></ui-view>
-
     </div>
 </body>
-</html>
 
+</html>
