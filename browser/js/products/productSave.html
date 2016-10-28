@@ -1,0 +1,59 @@
+<!-- Product Gallery -->
+    <section class="fw-section bg-gray padding-top-3x">
+      <div class="container padding-top">
+        <div class="product-gallery">
+          <!-- Preview -->
+          <ul class="product-gallery-preview">
+            <li id="preview01" class='current'><img src="{{product.photo}}" alt="Product"></li>
+          </ul><!-- .product-gallery-preview -->
+        </div><!-- .product-gallery -->
+      </div><!-- .container -->
+    </section><!-- .fw-section.bg-gray -->
+
+    <!-- Product Info -->
+    <section class="fw-section bg-gray padding-bottom-3x">
+      <div class="container">
+        <div class="product-info padding-top-2x text-center">
+          <h1 class="h2 space-bottom-half">{{product.name}}</h1>
+          <h2>{{product.price | priceFilter }}</h2>
+          <p class="text-sm text-gray">{{product.description}}</p>
+
+          <div class="product-meta">
+            <div class="product-sku">
+              <strong>SKU: </strong>
+              <span>{{randomNum(0,10000000000)}}</span>
+            </div>
+            <div class="product-category">
+              <strong>Category: </strong>
+              <a ui-sref='products'>{{product.category | filter: upperCase}}</a>
+            </div>
+          </div><!-- .product-meta -->
+
+          <div class="product-tools shop-item">
+            <a href="#" class="add-to-cart">
+              <em>Add to Cart</em>
+              <svg x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32">
+  							<path stroke-dasharray="19.79 19.79" stroke-dashoffset="19.79" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" d="M9,17l3.9,3.9c0.1,0.1,0.2,0.1,0.3,0L23,11"></path>
+  						</svg>
+            </a><!-- .add-to-cart -->
+          </div><!-- .product-tools -->
+
+          <div class="product-share">
+            <span>Share this product: </span>
+            <div class="social-bar">
+              <a href="#" class="sb-facebook" data-toggle="tooltip" data-placement="top" title="Facebook">
+                <i class="socicon-facebook"></i>
+              </a>
+              <a href="#" class="sb-twitter" data-toggle="tooltip" data-placement="top" title="Twitter">
+                <i class="socicon-twitter"></i>
+              </a>
+              <a href="#" class="sb-instagram" data-toggle="tooltip" data-placement="top" title="" data-original-title="Instagram">
+                <i class="socicon-instagram"></i>
+              </a>
+            </div>
+          </div><!-- .product-share -->
+        </div><!-- .product-info -->
+      </div><!-- .container -->
+    </section><!-- .fw-section.bg-gray -->
+
+    

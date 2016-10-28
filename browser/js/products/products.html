@@ -1,0 +1,60 @@
+<div>
+    <div class="text-center">
+    <rando-greeting style="margin-left:auto;margin-right:auto"></rando-greeting>
+    </div>
+    <!-- Page Title -->
+    <section class="container padding-top-3x">
+        <h1 class="space-top-half tablet-center">Free $hit</h1>
+    </section>
+    <!-- .container-fluid -->
+    <!-- CATEGORY FILTER BAR -->
+    <div class="row">
+        <section class="container padding-top">
+            <div class="filters-bar space-top-half">
+                <div class="column">
+
+
+                    <!-- SEARCH BAR -->
+                    <div class="filters-bar space-top-half">
+                        <div class="shop-bar">
+                            <div class="column">
+                                <p class="text-sm space-bottom-none">
+                                    <span class="text-gray">Showing</span> {{ filteredProducts.length ? filteredProducts.length : products.length }} items
+                                </p>
+                            </div>
+                            <div class="column">
+                                <form method="get" class="search-box">
+                                    <input ng-model="productSearch" type="text" class="form-control" placeholder="Search shop">
+                                    <button type="submit">
+                                        <i class="material-icons search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                        <!-- CATEGORIES -->
+                        <ul class="nav-filters">
+                            <!-- ALL CATEGORY TAB -->
+                            <li ng-class=isActive(-1) style='cursor:pointer'><a ng-click=setSelected(-1)>All</a> <sup>{{products.length}}</sup></li>
+                            <!-- NG-REPEAT OVER EACH CATEGORY TO DISPLAY EACH TAB -->
+
+                            <li ng-repeat='category in categories' ng-class='isActive(category.id)'><a style='cursor:pointer' ng-click='setSelected(category.id)'>{{ category.name | filter: upperCase }} </a> <sup>{{categoryCount(category.id)}}</sup></li>
+                        </ul>
+
+                    </div>
+
+                </div>
+        </section>
+        </div>
+
+        <!-- Shop Catalog -->
+        <section class="container padding-bottom-3x">
+            <div class="row">
+                <!-- Item -->
+                <!-- PUT PRODUCTS HERE  -->
+                <product ng-repeat="product in (filteredProducts = (filteredCategories | filter: {name: productSearch }))" product='product'></product>
+            </div>
+        </section>
+
+    </div>

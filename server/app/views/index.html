@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/" />
+    <title>Fullstack Academy Generated Application</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/modern-theme/material-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="/modern-theme/socicon.min.css" />
+    <link rel="stylesheet" type="text/css" href="/modern-theme/theme.css" />
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <script src="/jquery/dist/jquery.min.js"></script>
+    <script src="/lodash/index.js"></script>
+    <script src="/angular/angular.js"></script>
+    <script src="/angular-animate/angular-animate.js"></script>
+    <script src="/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/angular-ui-bootstrap/ui-bootstrap.js"></script>
+    <script src="/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/socket.io-client/socket.io.js"></script>
+    <script src="/main.js"></script>
+</head>
+<body ng-app="FullstackGeneratedApp">
+    <!-- <img style="width:500px; height:500px" id="botImageEnd" src="chatbot/chat-01.png" /> -->
+    <button id="floatButton">Click me to ask for help!</button>
+    <audio autoplay src='/feeMovie/looking.mp3'></audio>
+    <div id="money"></div>
+    <chat-bot id="chat-bot"></chat-bot>
+    <navbar style="z-index: 2; position: absolute" nav-bar-util></navbar>
+    <!-- <div id="main" ui-view> -->
+    <div id='main'>
+        <ui-view></ui-view>
+
+    </div>
+</body>
+</html>
+
