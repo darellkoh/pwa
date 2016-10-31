@@ -101,11 +101,9 @@ app.directive('order', function (OrderFactory, ProductsFactory) {
 app.service('OrderFactory', function ($http) {
   var showCart = false;
   var order = [];
-  console.log("HERE ORDER");
   var self = this;
 
   this.sendCartToSession = function (order) {
-    console.log("order!!!!", order);
     $http.post('/api/orders/?sessionSave=true', order).then(function (orderConf) {});
   };
   this.getSessionCart = function () {
@@ -147,7 +145,6 @@ app.service('OrderFactory', function ($http) {
     return subTotal;
   };
   this.increaseQty = function (product) {
-    console.log("THIS", this);
     product.qty++;
     self.sendCartToSession(order);
   };
@@ -183,12 +180,10 @@ app.service('OrderFactory', function ($http) {
     }
   };
   this.submitOrder = function (cb) {
-    console.log('submitting order');
     if (order.length === 0) {
       return;
     } else {
       $http.post('/api/orders', order).then(function (response) {
-        console.log('orderrrrr', order);
         if (response.status === 201) {
           order = [];
           cb();
