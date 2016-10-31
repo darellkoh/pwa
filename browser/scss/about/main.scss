@@ -5,24 +5,19 @@
     width: 75%;
     @include clearfix;
     p {
-        width: 75%;
+        width: 73%;
         margin: 0 auto;
-        font-size: 28px;
+        font-size: 20px;
         font-color: black;
         font-weight: none;
         float: center;
     }
 }
 
-.img-centered {
-    display: flex;
-    text-align: center;
-    align-item: center;
-    justify-content: center;
-}
 
 .ih-item {
     position: relative;
+    margin: 0 auto;
     -webkit-transition: all 0.35s ease-in-out;
     -moz-transition: all 0.35s ease-in-out;
     transition: all 0.35s ease-in-out;

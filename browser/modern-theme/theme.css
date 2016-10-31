@@ -109,10 +109,11 @@ a.link-title:hover {
 }
 
 img {
-    vertical-align: middle;
-    display: block;
+    display: inline-block;
     max-width: 100%;
     height: auto;
+    margin-left: 0 auto;
+    margin-right: 0 auto;
 }
 
 svg {
