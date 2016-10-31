@@ -1,0 +1,37 @@
+
+<h1> ORDERS </h1>
+
+
+<div class="row">
+
+	<div class="col-md-3 text-center" >
+		<h2> Order ID </h2>
+	</div>
+	<div class="col-md-3 text-center" >
+		<h2> Order Date </h2>
+	</div>
+	<div class="col-md-3 text-center" >
+		<h2> Order Status </h2>
+	</div>
+	<div class="col-md-3 text-center" >
+		<h2> User Id </h2>
+	</div>
+
+</div>
+
+<div ng-repeat="order in orders" class="row">
+	
+	<div class="col-md-3 text-center" >
+		<a ui-sref="orderDetails({ id: order.id })"><h3> {{ order.id }} </h3></a>
+	</div>
+	<div class="col-md-3 text-center" >
+		<h3> {{ order.date }}  </h3>
+	</div>
+	<div class="col-md-3 text-center" >
+		<h3> {{ order.complete ? "Complete" : "Open" }}  </h3>
+	</div>
+	<div class="col-md-3 text-center" >
+		<h3> {{ order.userId }}  </h3>
+	</div>
+	
+</div>

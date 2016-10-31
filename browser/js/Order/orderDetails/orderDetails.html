@@ -1,0 +1,75 @@
+
+<div class=container style="margin-top: 70px">
+	<h1> ORDER DETAILS </h1>
+
+	<!-- TOP OF PAGE ORDER DETAILS -->
+	<div class="row">
+		<!-- 1st COLUMN -->
+		<div class="col-md-3 text-right" >
+			<h2><strong> User ID: 		</strong></h2>
+			<h2><strong> Order ID: 		</strong></h2>
+			<h2><strong> Order Date: 	</strong></h2>
+			<h2><strong> Order Time: 	</strong></h2>
+			<h2><strong> Order STATUS: 	</strong></h2>
+		</div>
+		<!-- 2nd COLUMN -->
+		<div class="col-md-2 text-left" >
+			<h2> {{ order.userId }} 	</h2>
+			<h2> {{ order.id }} 		</h2>
+			<h2> {{ order.date.split('T')[0] }} </h2>
+			<h2> {{ order.date.split('T')[1].slice(0,-5) }}  </h2>
+			<h2> {{ order.complete ? "Complete" : "Open"  }} </h2>
+		</div>
+
+	</div>
+
+	<!-- ITEMS HEADER -->
+	<div class="row">
+
+		<div class="col-md-2 text-center" >
+			<h3><strong> ID </strong></h3>
+		</div>
+		<div class="col-md-3" >
+			<h3><strong> Name </strong></h3>
+		</div>
+		<div class="col-md-4" >
+			<h3><strong> Description </strong></h3>
+		</div>
+		<div class="col-md-2" >
+			<h3><strong> Cost </strong></h3>
+		</div>
+		<div class="col-md-1 text-center" >
+			<h3><strong> Qty </strong></h3>
+		</div>
+
+	</div>
+
+	<!-- ITEMS  -->
+	<div ng-repeat="item in orderItems" class="row">
+		
+		<div class="col-md-2 text-center" >
+			<h2> {{ item.id }} </h2>
+		</div>
+		<div class="col-md-3" >
+			<h2> {{ item.product.name }}</h2>
+		</div>
+		<div class="col-md-4" >
+			<h2> {{ item.product.description }} </h2>
+		</div>
+		<div class="col-md-2" >
+			<h2> {{ item.productCost | priceFilter }} </h2>
+		</div>
+		<div class="col-md-1 text-center" >
+			<h2> {{ item.qtyPurchased }} </h2>
+		</div>
+		
+	</div>
+
+	<!-- ORDER TOTAL  -->
+	<div class="row">
+		<div class="col-md-6 pull-right">
+			<h1> <strong>Order Total:</strong> {{ orderTotal() | priceFilter }} </h1>
+		</div>
+	</div>
+
+</div>
