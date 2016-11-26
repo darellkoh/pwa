@@ -1,4 +1,4 @@
-app.directive('navBarUtil', function(OrderFactory){
+app.directive('navBarUtil', function(){
     return {
         restrict: 'A',
         link: function(s,e,a){
@@ -45,11 +45,10 @@ app.directive('navBarUtil', function(OrderFactory){
                 toolbarSection.removeClass('current');
                 OrderFactory.setShowCart(false);
                 }else{
-                    console.log("else");
+                    return;
                 }
             });
             $('#main').on('click', function(e) {
-                console.log(e.target.tagName == "EM");
                   closeToolBox();
                if(e.target.tagName === "EM"){
                    $('#cart-toolbar-toggle').addClass('active');
