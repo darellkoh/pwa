@@ -44,9 +44,6 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
 
         },
         controller: function($scope){
-           // $scope.showCart = OrderFactory.getShowCart;
-           // $scope.toggleCartView = OrderFactory.toggleShowCart;
-           // $scope.totalQuantity = OrderFactory.totalQuantity;
            $scope.isLoggedIn = NavFactory.isLoggedIn;
            $scope.setSignUp = NavFactory.setSignUp;
            $scope.getSignUp = NavFactory.getSignUp;

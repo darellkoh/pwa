@@ -10,8 +10,7 @@ router.use('/users', require('./user'));
 router.use('/category', require('./category'));
 router.use('/tags', require('./tags'));
 
-// Make sure this is after all of
-// the registered routes!
+
 router.use(function (req, res) {
     res.status(404).end();
 });

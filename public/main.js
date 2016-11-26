@@ -2,67 +2,14 @@
 
 window.app = angular.module('FullstackGeneratedApp', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngAnimate']);
 
-app.filter('priceFilter', function () {
-  return function (amount) {
-    return '$' + (amount / 100).toFixed(2);
-  };
-});
-
 app.config(function ($urlRouterProvider, $locationProvider) {
-  // This turns off hashbang urls (/#about) and changes it to something normal (/about)
   $locationProvider.html5Mode(true);
-  // If we go to a URL that ui-router doesn't have registered, go to the "/" url.
   $urlRouterProvider.otherwise('/');
-  // Trigger page refresh when accessing an OAuth route
   $urlRouterProvider.when('/auth/:provider', function () {
     window.location.reload();
   });
 });
 
-// This app.run is for controlling access to specific states.
-app.run(function ($rootScope, AuthService, $state, OrderFactory, NavFactory) {
-
-  OrderFactory.getSessionCart();
-  AuthService.getLoggedInUser().then(function (user) {
-    NavFactory.setUser(user);
-  });
-
-  // The given state requires an authenticated user.
-  var destinationStateRequiresAuth = function destinationStateRequiresAuth(state) {
-    return state.data && state.data.authenticate;
-  };
-
-  // $stateChangeStart is an event fired
-  // whenever the process of changing a state begins.
-  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-
-    if (!destinationStateRequiresAuth(toState)) {
-      // The destination state does not require authentication
-      // Short circuit with return.
-      return;
-    }
-
-    if (AuthService.isAuthenticated()) {
-      // The user is authenticated.
-      // Short circuit with return.
-      return;
-    }
-
-    // Cancel navigating to new state.
-    event.preventDefault();
-
-    AuthService.getLoggedInUser().then(function (user) {
-      // If a user is retrieved, then renavigate to the destination
-      // (the second time, AuthService.isAuthenticated() will work)
-      // otherwise, if no user is logged in, go to "login" state.
-      if (user) {
-        $state.go(toState.name, toParams);
-      } else {
-        $state.go('login');
-      }
-    });
-  });
-});
 
 app.directive('order', function (OrderFactory, ProductsFactory) {
   return {
@@ -90,7 +37,6 @@ app.directive('order', function (OrderFactory, ProductsFactory) {
           "z-index": "980"
         });
         setTimeout(function () {
-          // angular.element("#botImageEnd").hide();
           angular.element("#money").hide();
         }, 3000);
       }
@@ -106,11 +52,11 @@ app.service('OrderFactory', function ($http) {
   this.sendCartToSession = function (order) {
     $http.post('/api/orders/?sessionSave=true', order).then(function (orderConf) {});
   };
-  this.getSessionCart = function () {
-    return $http.get('/sessionCart').then(function (cart) {
-      if (cart.data.length > 0) order = cart.data;
-    });
-  };
+  // this.getSessionCart = function () {
+  //   return $http.get('/sessionCart').then(function (cart) {
+  //     if (cart.data.length > 0) order = cart.data;
+  //   });
+  // };
   this.addToCart = function (product) {
     if (!product.qty) {
       product.qty = 1;
@@ -234,8 +180,6 @@ app.directive('ordersView', function () {
   };
 });
 
-// TODO : HAVE THIS STATE LOAD FOR AN ADMIN WHEN AN ORDERS BUTTON IS CLICKED
-// VIA UI-SREF
 app.config(function ($stateProvider) {
   $stateProvider.state('userOrders', {
     url: 'orders',
@@ -244,8 +188,6 @@ app.config(function ($stateProvider) {
 });
 
 app.config(function ($stateProvider) {
-
-  // Register our *about* state.
   $stateProvider.state('about', {
     url: '/about',
     controller: 'AboutController',
@@ -254,8 +196,6 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('AboutController', function ($scope, FullstackPics) {
-
-  // Images of beautiful Fullstack people.
   $scope.images = _.shuffle(FullstackPics);
 });
 
@@ -437,12 +377,9 @@ app.config(function ($stateProvider) {
         return $q.when(Session.user);
       }
 
-      // Make request GET /session.
-      // If it returns a user, call onSuccessfulLogin with the response.
-      // If it returns a 401 response, we catch it and instead resolve to null.
-      return $http.get('/session').then(onSuccessfulLogin).catch(function () {
-        return null;
-      });
+      // return $http.get('/session').then(onSuccessfulLogin).catch(function () {
+      //   return null;
+      // });
     };
 
     this.login = function (credentials) {
@@ -499,14 +436,12 @@ app.directive('login', function (NavFactory, AuthService, $state) {
       $scope.login = {};
       $scope.error = null;
 
-      // $scope.signup = NavFactory.signup;
       $scope.sendLogin = function (loginInfo) {
 
         $scope.error = null;
 
         AuthService.login(loginInfo).then(function (user) {
           NavFactory.setLoggedIn(true);
-          console.log("USER FROM AUTH LOGIN IN LOGIN DIRECTIVE", user);
           NavFactory.setUser(user);
         }).catch(function () {
           $scope.error = 'Invalid login credentials.';
@@ -560,7 +495,6 @@ app.factory('SignUpFactory', function ($http, NavFactory) {
   return {
     signUp: function signUp(signUpInfo) {
       return $http.post('/api/users/', signUpInfo).then(function (user) {
-        console.log("USER FROM SIGNUP", user);
         NavFactory.setLoggedIn(true);
       }).catch(function (err) {
         console.log("err", err);
@@ -596,8 +530,7 @@ app.config(function ($stateProvider) {
         $scope.stash = stash;
       });
     },
-    // The following data.authenticate is read by an event listener
-    // that controls access to this state. Refer to app.js.
+
     data: {
       authenticate: true
     }
@@ -634,12 +567,6 @@ app.directive('product', function () {
         OrderFactory.setShowCart(true);
         OrderFactory.addToCart(product);
         OrderFactory.setShowCart(true);
-        //OrderFactory.toggleShowCart();
-        //   }else{
-        //     OrderFactory.setShowCart(false);
-        //     OrderFactory.addToCart(product);
-        //     OrderFactory.toggleShowCart();
-        // }
       };
     }
   };
@@ -1032,14 +959,6 @@ app.directive('navBarUtil', function (OrderFactory) {
 
       var toggleSection = $('.toggle-section');
 
-      // toggleSection.on('click', function(e) {
-      //     console.log("HERE toggleSection")
-      //     var currentValue = $(this).attr('href');
-      //     toolbarSection.removeClass('current');
-      //     $(currentValue).addClass('current');
-      //     e.preventDefault();
-      // });
-
       $('#main').on('click', function (e) {
         console.log(e.target.tagName == "EM");
         if (e.target.tagName !== "EM") {
@@ -1055,16 +974,11 @@ app.directive('navBarUtil', function (OrderFactory) {
         console.log(e.target.tagName == "EM");
         closeToolBox();
         if (e.target.tagName === "EM") {
-          // if ($(e.target).is('.active')) {
-          //     closeToolBox();
-          //     toolbarDropdown.removeClass('open');
-          // } else {
           $('#cart-toolbar-toggle').addClass('active');
           $('#toolbar-dropdown-id').addClass('open');
-          // closeToolBox();
+
 
           $('#cart-toolbar-section').addClass('current');
-          // }
           e.preventDefault();
         }
       });
@@ -1214,22 +1128,6 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
           $state.go('home');
         });
       };
-
-      var setUser = function setUser() {
-        AuthService.getLoggedInUser().then(function (user) {
-          scope.user = user;
-        });
-      };
-
-      var removeUser = function removeUser() {
-        scope.user = null;
-      };
-
-      setUser();
-
-      $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);
-      $rootScope.$on(AUTH_EVENTS.logoutSuccess, removeUser);
-      $rootScope.$on(AUTH_EVENTS.sessionTimeout, removeUser);
     },
     controller: function controller($scope) {
       $scope.showCart = OrderFactory.getShowCart;

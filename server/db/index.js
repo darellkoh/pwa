@@ -13,8 +13,6 @@ var Order = require('./models/order');
 var Tags = require('./models/tags');
 var Category = require('./models/category');
 
-// if we had more models, we could associate them in this file
-// e.g. User.hasMany(Reports)
 
 Product.belongsToMany( Tags, {through: 'ProductTags'} );
 Tags.belongsToMany( Product, {through: 'ProductTags'} );
@@ -33,8 +31,6 @@ OrderItem.belongsTo( Order );
 Order.belongsTo( User );
 Order.hasMany( OrderItem );
 Product.hasMany( OrderItem );
-// Order.belongsToMany( Product, {through: OrderItem});
-// Product.belongsToMany( Order, {through: OrderItem});
 
 Review.belongsTo( User );
 Review.belongsTo( Product );
