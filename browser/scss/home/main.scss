@@ -9,7 +9,6 @@
     float: center;
     text-align: left;
     @include clearfix;
-
     fullstack-logo {
         padding-top: 30px;
         width: 150px;
@@ -44,15 +43,9 @@
     .affiliation {
         font-weight: bold;
         text-align: center;
-
-            margin: 0 auto;
-            display: block;
-
-            height: auto;
-            // text-align: left;
-            // font-size: 16px;
-            // margin-bottom: 10px;
-        }
+        margin: 0 auto;
+        display: block;
+        height: auto;
     }
 }
 
