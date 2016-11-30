@@ -9,8 +9,6 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('AboutController', function ($scope, FullstackPics) {
-
-
     $scope.images = _.shuffle(FullstackPics);
 
 });
