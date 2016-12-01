@@ -156,6 +156,15 @@ svg {
     margin: 0 auto;
 }
 
+.video-responsive {
+    position: relative;
+    display: block;
+    max-width: 100%;
+    max-height: auto;
+    text-align: center;
+    margin: 0 auto;
+}
+
 .imagedropshadow {
     padding: 5px;
     border: solid 1px #EFEFEF;
